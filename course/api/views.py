@@ -419,7 +419,7 @@ def SubjectList(request):
     if filterset.is_valid():
          queryset = filterset.qs
     paginator = PageNumberPagination()
-    paginator.page_size=5
+    paginator.page_size=10
     result_page = paginator.paginate_queryset(queryset, request)
     serializer = SubjectViewSerializer(result_page, many=True)
     return paginator.get_paginated_response(serializer.data)
@@ -437,7 +437,7 @@ def TeacherSubject(request):
     if filterset.is_valid():
          queryset = filterset.qs
     paginator = PageNumberPagination()
-    paginator.page_size = 5
+    paginator.page_size = 10
     result_page = paginator.paginate_queryset(queryset, request)
     serializer = SubjectSerializer(result_page ,many=True)
     for i in range(len(serializer.data)):
@@ -474,7 +474,7 @@ def CoursesIntheSubject(request,pk):
     if filterset.is_valid():
         queryset = filterset.qs
     paginator = PageNumberPagination()
-    paginator.page_size = 5
+    paginator.page_size = 10
     result_page = paginator.paginate_queryset(queryset, request)
     serializer = SerializerForCourse(result_page, many=True)
     return paginator.get_paginated_response(serializer.data)
