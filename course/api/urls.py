@@ -16,7 +16,7 @@ urlpatterns = [
     path('mycoursesteacher/<int:upk>/',views.TeacherCourses,name='mycoursesteacher'),
     path('students/<int:pk>/',views.Students,name='students_in_courses'),
     path('studentscount/',views.StudentsCountTeacher,name='students_count'),
-    path('enrolledcoursesinsubject/<int:pk/',views.enrolledCoursesInMySubjects,name='enrolled_courses_subject'),
+    path('enrolledcoursesinsubject/<int:pk>/',views.enrolledCoursesInMySubjects,name='enrolled_courses_subject'),
 
     # Urls for modules
     path('createmodule/<int:pk>/',views.CreateModule,name='create_module'),
