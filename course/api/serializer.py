@@ -110,8 +110,7 @@ class CourseCreateSerializer(serializers.ModelSerializer):
     #     return instance
 
 class EnrolledCourseSerializer(serializers.ModelSerializer):
-    modules=ModuleSerializer(many=True)
-
+    # modules=ModuleSerializer(many=True)
     class Meta:
         model = Course
         fields = "__all__"

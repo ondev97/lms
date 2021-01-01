@@ -482,20 +482,23 @@ def CoursesIntheSubject(request,pk):
     # return Response(serializer.data)
 
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def enrolledCoursesInMySubjects(request, pk):
     student = StudentProfile.objects.get(user=request.user)
     subject = Subject.objects.get(id=pk)
     enrollments = Enrollment.objects.filter(student=student, course__subject=subject)
-    courses = []
+    courses_ids = []
     for e in enrollments:
-        if e.course not in courses:
-            courses.append(e.course)
+        if e.course not in courses_ids:
+            courses_ids.append(e.course.id)
+    courses = Course.objects.filter(id__in=courses_ids)
     paginator = PageNumberPagination()
     paginator.page_size=10
     courses_search = CourseFilter(request.GET,queryset=courses)
     result_page = paginator.paginate_queryset(courses_search.queryset,request)
     serializer = EnrolledCourseSerializer(result_page, many=True)
-    return Response(serializer.data)
+    return paginator.get_paginated_response(serializer.data)
 
 #     paginator = PageNumberPagination()
 #     paginator.page_size=5
